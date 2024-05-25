@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home-CyberSpace</title>
+    <link rel="stylesheet" href="styles/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="grad"></div>
+    <h1 class="headingfirstclass">Experience the best</h1>
+    <h3>Invest in a partnership that can guarantee results</h3>
+    <button class="FreePromo" onclick="scrollToSection('sign-up')">Free Examination Cost</button>
+    <script>
+    function scrollToSection(sectionId) {
+        var section = document.getElementById(sectionId);
+        var offset = -70; // Adjust this value to control how far above the section you want to scroll
+    
+        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        var targetPosition = sectionTop + offset;
+    
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Presence</title>
+    <link rel="stylesheet" href="styles/MainPageStyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow-y: hidden; /* Disable default scrolling */
+        }
+        section {
+            margin-top: 50px; /* Add margin for better scrolling */
+            height: 100vh; /* Each section takes the full height of the viewport */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation buttons -->
+    <div class="buttons-container">
+        <button class="buttons" onclick="scrollToSection('home')">Home</button>
+        <button class="buttons" onclick="scrollToSection('about')">About Us</button>
+        <button class="buttons" onclick="scrollToSection('services')">Our Services</button>
+        <button class="buttons" onclick="scrollToSection('why')">Why Choose Us</button>
+        <button class="buttons" onclick="scrollToSection('get-started')">How to Get Started</button>
+        <button class="buttons2" onclick="scrollToSection('sign-up')">Sign-Up</button>
+        
+        <svg width="10000" height="1" xmlns="http://www.w3.org/2000/svg">
+            <rect width="10000" height="1" x="0" y="0" rx="0" ry="0" style="fill:rgb(209, 214, 209)" />
+        </svg>
+    </div>
+
+    <!-- Content sections -->
+    <div id="home" class="section"></div>
+    <div id="about" class="section"></div>
+    <div id="services" class="section"></div>
+    <div id="why" class="section"></div>
+    <div id="get-started" class="section"></div>
+    <div id="sign-up" class="section"></div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            var offset = -70; // Adjust this value to control how far above the section you want to scroll
+
+            var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            var targetPosition = sectionTop + offset;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Load content into sections
+        function loadContent() {
+            var sections = ['home', 'about', 'services', 'why', 'get-started', 'sign-up'];
+            sections.forEach(function(sectionId) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById(sectionId).innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", sectionId + '.html', true);
+                xhttp.send();
+            });
+        }
+
+        // Scroll to the next or previous section based on scroll direction
+        function handleScroll(event) {
+            const sections = document.querySelectorAll('.section');
+            const sectionArray = Array.from(sections);
+            const currentSection = sectionArray.findIndex(section => section.getBoundingClientRect().top >= 0);
+            const deltaY = event.deltaY;
+
+            if (deltaY > 0 && currentSection < sections.length - 1) {
+                // Scroll down
+                scrollToSection(sections[currentSection + 1].id);
+            } else if (deltaY < 0 && currentSection > 0) {
+                // Scroll up
+                scrollToSection(sections[currentSection - 1].id);
+            }
+        }
+
+        // Call loadContent function when the page loads
+        window.onload = function() {
+            loadContent();
+        };
+
+        // Add event listener for mouse wheel scrolling
+        window.addEventListener('wheel', handleScroll);
+    </script>
+</body>
+</html>
