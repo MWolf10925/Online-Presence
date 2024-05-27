@@ -126,7 +126,7 @@ li {
 }
 
 .aboutus {
-    margin-top: 30%;
+    margin-top: 35%;
     margin-left: 5%;
     text-align: left;
 }
@@ -229,7 +229,7 @@ h4 {
         height: 15%;
         background-image: linear-gradient(rgba(255, 0, 0, 0), rgba(76, 170, 200, 0.3));
         width: 100%;
-        margin-top: 25%;
+        margin-top: 30%;
         position: absolute;
     }
     h1 {
